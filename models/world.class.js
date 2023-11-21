@@ -9,7 +9,7 @@ class World {
         new Cloud()
     ];
     backgroundObjects = [
-        new BackgroundObject('img/5_background/layers/3_third_layer/1.png' ,0 ,80)
+        new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0)
     ];
     canvas;
     ctx;
@@ -23,18 +23,19 @@ class World {
 
 
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // das Canvas wird gelöscht
+        // dann werden Elemente direkt hinzugefügt
+        this.addObjectsToMap(this.backgroundObjects); // damit Hintergrundobjekt erst hinzugefügt werden kann, zieht man nach vorne!
         this.addToMap(this.character);
         this.addObjectsToMap(this.enemies);
         this.addObjectsToMap(this.clouds);
-        this.addObjectsToMap(this.backgroundObjects);
+        
 
       
       
       
         // draw() wird immer wieder aufgerufen
-        let self = this;   // resimi sürekli göstermesi icin
+        let self = this;   // das Bild wird durchgehend angezeigt!
         requestAnimationFrame(function(){
             self.draw();
         });
