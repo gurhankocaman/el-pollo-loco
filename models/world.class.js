@@ -17,6 +17,7 @@ class World {
     canvas;
     ctx;
     keyboard;
+    camera_x = -100;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -33,11 +34,15 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // das Canvas wird gelöscht
+
+
+        this.ctx.translate(this.camera_x, 0);
         // dann werden Elemente direkt hinzugefügt
         this.addObjectsToMap(this.backgroundObjects); // damit Hintergrundobjekt erst hinzugefügt werden kann, zieht man nach vorne!
         this.addToMap(this.character);
         this.addObjectsToMap(this.enemies);
         this.addObjectsToMap(this.clouds);
+        this.ctx.translate(-this.camera_x, 0);
         
 
       
@@ -57,7 +62,17 @@ class World {
     }
 
     addToMap(mo) {
+        if(mo.otherDirection) {                
+             this.ctx.save();
+             this.ctx.translate(mo.width, 0);   // translate() verursacht das Verschieben
+             this.ctx.scale(-1, 1);             // scale() verursacht die Spiegelung
+             mo.x = mo.x * -1;
+        }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        if(mo.otherDirection) {
+            mo.x = mo.x * -1;
+            this.ctx.restore();
+        }
     }
 
 }
