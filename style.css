@@ -1,9 +1,138 @@
+@font-face {
+    font-family: 'Zabars';
+    src: url('fonts/zabars.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PTSans';
+    src: url('fonts/PTSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PTSansBold';
+    src: url('fonts/PTSans-Bold.ttf') format('truetype');
+}
+
+
+html,
 body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font-family: 'PTSans', sans-serif;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.d-none {
+    display: none;
+}
+
+.content-headline {
+    margin: 16px;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Zabars', serif;
+    letter-spacing: 5px;
+    margin: 0;
+}
+
+h1 {
+    font-size: 72px;
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.8);
+}
+
+h2 {
+    font-size: 42px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+.canvas-container {
+    position: relative;
+    width: 720px;
+    height: 480px;
+}
+canvas {
+    display: block;
+    background-color: black;
+    border-radius: 16px;
+    box-shadow: 0 0 16px 8px rgba(0, 0, 0, 0.6);
+    margin: 0;
+    padding: 0;
+}
+
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    background-image: url(img/10_additional/background.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-canvas {
-    background-color: black;
+.start-screen-container {
+    position: absolute;
+    top: 0;
+    width: 720px;
+    height: 480px;
 }
+
+.start-screen-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+}
+
+.start-btn {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 32px;
+    width: 125px;
+    height: 63px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow 100ms ease-in-out;
+}
+
+.btn {
+    background-color: #FFC376;
+    border: 2px solid #98450A;
+    cursor: pointer;
+}
+
+.legal-notice-link {
+    position: absolute;
+    bottom: 8px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.legal-notice-link:hover {
+    text-decoration: none;
+}
+
+.legal-notice-subheadline {
+    font-family: 'PTSansBold', sans-serif;
+}
+
+

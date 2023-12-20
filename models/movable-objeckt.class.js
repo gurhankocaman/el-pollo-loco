@@ -17,6 +17,9 @@ class MovableObject extends DrawableObject{
 
 
         isAboveGround() {
+            if (this instanceof ThrowableObject) { // Throwable object should always fall
+                return true;
+            }
             return this.y < 145;
         }        
 
@@ -24,15 +27,7 @@ class MovableObject extends DrawableObject{
 
 
 
-        drawFrame(ctx) {
-            if (this instanceof Character || this instanceof Chicken) {       
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-            }
-        }
+
 
         // character.isColliding(chicken);
         isColliding(mo) {

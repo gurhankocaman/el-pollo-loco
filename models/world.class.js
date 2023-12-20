@@ -7,6 +7,7 @@ class World {
     camera_x = 0;
     bottle;
     statusBar = new Statusbar();
+    throwableObjects = [];
     
 
     constructor(canvas, keyboard) {
@@ -15,21 +16,34 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
         this.character.world = this;
     }
 
-    checkCollisions() { 
+    run() { 
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if( this.character.isColliding(enemy) ) {
-                    this.character.hit();
-                }
-            });
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 1000);
+    }
+
+    checkThrowObjects() {
+        if (this.keyboard.D) {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(bottle);
+        }
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if( this.character.isColliding(enemy) ) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
+            }
+        });
     }
 
     draw() {
@@ -39,12 +53,20 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         // dann werden Elemente direkt hinzugefügt
         this.addObjectsToMap(this.level.backgroundObjects); // damit Hintergrundobjekt erst hinzugefügt werden kann, zieht man nach vorne!
+        
+        this.ctx.translate(-this.camera_x, 0); 
+        // ---- Space for fixed objects
         this.addToMap(this.statusBar);
+        this.ctx.translate(this.camera_x, 0); 
+
+        
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
+
         this.ctx.translate(-this.camera_x, 0);
         
 
