@@ -6,7 +6,9 @@ class World {
     keyboard;
     camera_x = 0;
     bottle;
-    statusBar = new Statusbar();
+    statusBarCharacter = new StatusBarCharacter();
+    statusBarBottles = new StatusBarBottles();
+    statusBarCoins = new StatusBarCoins();
     throwableObjects = [];
     
 
@@ -56,9 +58,12 @@ class World {
         
         this.ctx.translate(-this.camera_x, 0); 
         // ---- Space for fixed objects
-        this.addToMap(this.statusBar);
-        this.ctx.translate(this.camera_x, 0); 
-
+        this.addToMap(this.statusBarCharacter);
+        this.addToMap(this.statusBarBottles);
+        this.addToMap(this.statusBarCoins);
+        
+        this.ctx.translate(this.camera_x, 0);
+        
         
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
@@ -79,6 +84,8 @@ class World {
             self.draw();
         });
     }
+
+
 
     addObjectsToMap(objects) {
         objects.forEach(o => {

@@ -120,19 +120,5 @@ canvas {
     cursor: pointer;
 }
 
-.legal-notice-link {
-    position: absolute;
-    bottom: 8px;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.legal-notice-link:hover {
-    text-decoration: none;
-}
-
-.legal-notice-subheadline {
-    font-family: 'PTSansBold', sans-serif;
-}
 
 
