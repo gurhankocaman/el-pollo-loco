@@ -4,7 +4,7 @@ class DrawableObject {
     img;
     height = 150;
     width = 100; 
-    imageCache = {};
+    imageCache = [];
     currentImage = 0; 
 
 
@@ -23,7 +23,7 @@ class DrawableObject {
         if (this instanceof Character || this instanceof Chicken) {       
         ctx.beginPath();
         ctx.lineWidth = '5';
-        ctx.strokeStyle = 'blue';
+        ctx.strokeStyle = 'transparent';
         ctx.rect(this.x, this.y, this.width, this.height);
         ctx.stroke();
         }

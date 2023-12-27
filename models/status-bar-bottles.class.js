@@ -14,12 +14,14 @@ class StatusBarBottles extends DrawableObject {
         super();
         this.loadImages(this.IMAGES);
         this.x = 24;
-        this.y = 50;
+        this.y = 40;
         this.width = 180;
         this.height = 53;
         this.setBottles(0); // Set initial bottle amount
        
     }
+
+
 
     /**
      * Sets the number of bottles and updates the displayed image accordingly.

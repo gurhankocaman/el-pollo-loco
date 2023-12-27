@@ -10,6 +10,8 @@ class StatusBarCoins extends DrawableObject {
         'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png',
     ];
 
+    
+
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -40,7 +42,7 @@ class StatusBarCoins extends DrawableObject {
             
         if (this.coinAmount > 4) {
             return 5;
-        } else if (this.coinAmount > 4) {
+        } else if (this.coinAmount > 3) {
             return 4;
         } else if (this.coinAmount > 2) {
             return 3;

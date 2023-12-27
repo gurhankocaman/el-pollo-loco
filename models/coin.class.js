@@ -21,6 +21,8 @@
         'img/8_coin/coin_2.png'
     ];
 
+    
+
     constructor() {
         super().loadImage(this.IMAGES_COIN[0]);
         this.loadImages(this.IMAGES_COIN);  

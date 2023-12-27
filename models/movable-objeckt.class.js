@@ -24,11 +24,6 @@ class MovableObject extends DrawableObject{
         }        
 
 
-
-
-
-
-
         // character.isColliding(chicken);
         isColliding(mo) {
             return this.x + this.width > mo.x &&
@@ -70,7 +65,7 @@ class MovableObject extends DrawableObject{
 
         moveRight() {
             this.x += this.speed;
-            this.walking_sound.play();
+            walking_sound.play();
         }
 
         moveLeft(){
