@@ -1,20 +1,24 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let chicken_alarm = new Audio('audio/chicken_alarm.mp3');
 let walking_sound = new Audio('audio/running.mp3');
 let collect_bootle_sound = new Audio('audio/collect_bottle.mp3');
 let collect_coin_sound = new Audio('audio/collect_coin.mp3');
 let collision_enemies_sound = new Audio('audio/character_getting_hit.mp3');
 let bottle_breaks = new Audio('audio/breaking_bottle.mp3');
+let endboss_screams = new Audio('audio/chicken_scream_long.mp3');
 
 
 
 function startGame() {
     document.getElementById('start-screen').classList.add('d-none');
     init();
+
 }
 
 function init() {
+    initLevel();
     canvas = document.getElementById('canvas'); // Get the canvas element
     world = new World(canvas, keyboard); // Create a new World object
 }

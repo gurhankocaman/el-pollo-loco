@@ -5,6 +5,17 @@ class Character extends MovableObject {
     speed = 10;
     world;
 
+    /**
+    * Offset values for collision detection.
+    * @type {{ top: number, left: number, right: number, bottom: number }}
+    */
+    offset = {
+        top: 140,
+        left: 30,
+        right: 40,
+        bottom: 10
+    };
+
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',

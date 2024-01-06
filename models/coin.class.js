@@ -1,8 +1,8 @@
-    class Coin extends MovableObject {
-        y = 80 + Math.random() * 120; // set random y-position
-        x = 300 + Math.random() * 2600; // set random x-position 
-        width = 150;
-        height = 150;
+class Coin extends MovableObject {
+    y = 80 + Math.random() * 120; // set random y-position
+    x = 300 + Math.random() * 2600; // set random x-position 
+    width = 150;
+    height = 150;
     
     /**
      * Offset values for collision detection.
@@ -26,8 +26,7 @@
     constructor() {
         super().loadImage(this.IMAGES_COIN[0]);
         this.loadImages(this.IMAGES_COIN);  
-        this.animate();  
-        
+        this.animate();     
     }
 
     /**
