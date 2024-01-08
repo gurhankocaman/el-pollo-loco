@@ -97,6 +97,12 @@ class Endboss extends MovableObject {
                 this.endbossHurt();
             }
         }
+        if (this.isDead() && world.collectedCoins.length >= 7) {
+            this.endbossDead();
+        }
+        if(this.x === 0) {
+            this.endbossOutOfGame();
+        }
     }
 
     endbossWalks() {

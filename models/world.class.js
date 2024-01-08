@@ -14,6 +14,7 @@ class World {
     collectedCoins = []; // Array for collected coins
     endbossHasBeenHit = false;
     bottleIsThrown = false;
+    collisionWithEndboss = false;
 
    
     
