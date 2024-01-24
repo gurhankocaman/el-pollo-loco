@@ -7,9 +7,9 @@ class Character extends MovableObject {
     jumpOnEnemy = false;
 
     /**
-    * Offset values for collision detection.
-    * @type {{ top: number, left: number, right: number, bottom: number }}
-    */
+     * Offset values for collision detection.
+     * @type {{ top: number, left: number, right: number, bottom: number }}
+     */
     offset = {
         top: 140,
         left: 30,
@@ -48,7 +48,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-36.png',
         'img/2_character_pepe/3_jump/J-37.png',
         'img/2_character_pepe/3_jump/J-38.png',
-        'img/2_character_pepe/3_jump/J-39.png',
+        'img/2_character_pepe/3_jump/J-39.png'
     ];
 
     IMAGES_DEAD = [
@@ -64,9 +64,8 @@ class Character extends MovableObject {
     IMAGES_HURT = [
         'img/2_character_pepe/4_hurt/H-41.png',
         'img/2_character_pepe/4_hurt/H-42.png',
-        'img/2_character_pepe/4_hurt/H-43.png'
+        'img/2_character_pepe/4_hurt/H-43.png',
     ];
-
 
     constructor() {
         super().loadImage(this.IMAGES_IDLE[0]);
@@ -79,59 +78,121 @@ class Character extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Initializes the animation intervals for character movements and animations.
+     */
     animate() {
-
         setInterval(() => {
-            walking_sound.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-                walking_sound.play();
-            }
-
-            if (this.world.keyboard.LEFT && this.x > 0) {
-                this.moveLeft();
-                this.otherDirection = true;
-                walking_sound.play();
-            }
-
-            if (this.world.keyboard.UP && !this.isAboveGround()) {
-                this.jump();
-            }
-
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-            }
-
-            this.world.camera_x = -this.x + 70;
+            this.characterMovements();
         }, 1000 / 60);
-
-
         setInterval(() => {
+            this.characterAnimations();
+        }, 125);
+    }
 
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                walking_sound.pause();
-                character_dies.play();
-                setTimeout(() => {
-                    gameLost();
-                }, 1800);
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if (this.world.keyboard.RIGHT ||this.world.keyboard.LEFT) {
-                    // Walk animation
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
-                else {
-                    this.playAnimation(this.IMAGES_IDLE);
-                }
-            }
+    /**
+     * Updates character movements based on keyboard input.
+     */
+    characterMovements() {
+        walking_sound.pause();
+        this.characterMovesRight();
+        this.characterMovesLeft();
+        this.characterMovesUp();
+        this.world.camera_x = -this.x + 100; // Update the position of the camera based on the X position of the character.
+    }
 
-        }, 50);
+    /**
+    * Handles character animations based on different states.
+    */
+    characterAnimations() {
+        if (this.isDead() || this.world.collisionWithEndboss) {
+            this.characterDead();
+        } else if (this.isHurt()) {
+            this.characterHurt();
+        } else if (this.isAboveGround()) {
+            this.characterJumps();
+        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.characterWalks();
+        } else {
+            this.characterIdle();
+        }
+    }
 
+    /**
+     * Moves the character to the right.
+     */
+    characterMovesRight() {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) { // Animation is executed only if I press Arrow Right on keyboard and x-axis value is smaller than end value of x-axis
+            this.moveRight();
+            this.otherDirection = false; // Character isn't mirrored
+            walking_sound.play();
+        }
+    }
+
+    /**
+    * Moves the character to the left.
+    */
+    characterMovesLeft() {
+        if (this.world.keyboard.LEFT && this.x > 0) {
+            this.moveLeft();
+            this.otherDirection = true; // Character is mirrored
+            walking_sound.play();
+        }
+    }
+
+    /**
+    * Makes the character jump if above ground.
+    */
+    characterMovesUp() {
+        if (this.world.keyboard.UP && !this.isAboveGround()) { // Animation is executed only if I press UP key and if isAboveGround() returns false
+            this.jump();
+        }
+
+        if (this.world.keyboard.SPACE && !this.isAboveGround()) { // Animation is executed only if I press Space an UP key and if isAboveGround() returns false
+            this.jump();
+        }
+    }
+
+    /**
+     * Plays the hurt animation and sound for the character.
+     */
+    characterHurt() {
+        this.playAnimation(this.IMAGES_HURT);
+        character_hit.play();
+    }
+
+    /**
+     * Plays the jumping animation for the character.
+     */
+    characterJumps() {
+        this.playAnimation(this.IMAGES_JUMPING);
+
+    }
+
+    /**
+    * Plays the walking animation for the character.
+    */
+    characterWalks() {
+        this.playAnimation(this.IMAGES_WALKING);
+    }
+
+    /**
+     * Plays the idle animation for the character.
+     */
+    characterIdle() {
+        this.playAnimation(this.IMAGES_IDLE);
+    }
+
+    /**
+     * Plays the death animation and sound for the character, then triggers game loss.
+     */
+    characterDead() {
+        this.playAnimation(this.IMAGES_DEAD);
+        walking_sound.pause();
+        character_dies.play();
+        setTimeout(() => {
+            gameLost();
+        }, 1800);
     }
 
     jump() {

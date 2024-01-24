@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
     x = 3600;
     height = 275;
     width = 250;
-    speed = 6;
+    speed = 7;
     distanceTimer = 0;
  
     /**
@@ -97,7 +97,7 @@ class Endboss extends MovableObject {
                 this.endbossHurt();
             }
         }
-        if (this.isDead() && world.collectedCoins.length >= 7) {
+        if (this.isDead() && world.collectedCoins.length >= 6) {
             this.endbossDead();
         }
         if(this.x === 0) {
@@ -140,9 +140,5 @@ class Endboss extends MovableObject {
         walking_sound.pause();
         gameLost();
     }
-
-
-
-
     
 }

@@ -1,7 +1,5 @@
 class StatusBarBottles extends DrawableObject {
-   
-   
-    IMAGES = [
+    IMAGES_STATUSBAR_BOTTLES = [
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png',
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/20.png',
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/40.png',
@@ -12,26 +10,23 @@ class StatusBarBottles extends DrawableObject {
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES);
+        this.loadImages(this.IMAGES_STATUSBAR_BOTTLES);
         this.x = 24;
-        this.y = 40;
-        this.width = 180;
+        this.y = 50;
+        this.width = 200;
         this.height = 53;
         this.setBottles(0); // Set initial bottle amount
-       
+        
     }
-
-
 
     /**
      * Sets the number of bottles and updates the displayed image accordingly.
      * @param {number} bottleAmount - The amount of bottles to set.
      */
-
     setBottles(bottleAmount) {
         this.bottleAmount = bottleAmount; 
-        let path = this.IMAGES[this.resolveImageIndex()];
-        this.img = this.imageCache[path];
+        let path = this.IMAGES_STATUSBAR_BOTTLES[this.resolveImageIndex()]; 
+        this.img = this.imageCache[path]; 
     }
 
     /**
@@ -39,7 +34,6 @@ class StatusBarBottles extends DrawableObject {
      * @returns {number} - The index of the image to display.
      */
     resolveImageIndex() {
-            
         if (this.bottleAmount > 8) {
             return 5;
         } else if (this.bottleAmount > 6) {
@@ -50,10 +44,8 @@ class StatusBarBottles extends DrawableObject {
             return 2;
         } else if (this.bottleAmount > 0) {
             return 1;
-        } else  {
+        } else {
             return 0;
         }
     }
-
-
 }

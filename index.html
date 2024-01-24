@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>El Pollo Loco</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <!-- Script -->
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-objeckt.class.js"></script>    
     <script src="models/character.class.js"></script>
@@ -14,6 +20,7 @@
     <script src="models/status-bar-character.class.js"></script>
     <script src="models/status-bar-bottles.class.js"></script>
     <script src="models/status-bar-coins.class.js"></script>
+    <script src="models/status-bar-endboss.class.js"></script>
     <script src="models/world.class.js"></script>
     <script src="models/background-object.class.js"></script>
     <script src="models/keyboard.class.js"></script>
@@ -30,7 +37,26 @@
         <h1 class="content-headline">El Pollo Loco</h1>
         <div id="canvas-container" class="canvas-container">
 
+            <!-- Buttons -->
+            <div class="btns-top">
+                <img id="fullscreen-btn" class="fullscreen-btn btn" src="img/11_icons/fullscreen.png"
+                    onclick="toggleFullscreen()">
+                <img class="info-btn btn margin-left" src="img/11_icons/question_mark.png" onclick="openInfo()">
+                <img id="volume-btn" class="volume-btn btn margin-left" src="img/11_icons/volume_off.png"
+                    onclick="toggleSound()">
+            </div>
 
+            <!-- Mobile Buttons -->
+            <div class="btns-bottom">
+                <div>
+                    <img id="btn-left" class="control-btn btn" src="img/11_icons/arrow_left.png">
+                    <img id="btn-right" class="control-btn btn margin-left" src="img/11_icons/arrow_right.png">
+                </div>
+                <div>
+                    <img id="btn-jump" class="control-btn btn" src="img/11_icons/arrow_up.png">
+                    <img id="btn-throw" class="control-btn btn margin-left" src="img/11_icons/throw.png">
+                </div>
+            </div>
 
             <!-- Start Content -->
             <div id="start-screen" class="start-screen-container">
@@ -38,6 +64,60 @@
                     <h2>Start</h2>
                 </div>
                 <img class="start-screen-img" src="img/9_intro_outro_screens/start/startscreen_2.png">
+            </div>
+
+            <!-- Info Content -->
+            <div id="info-content" class="info-container d-none">
+                <div class="arrow-back" onclick="closeInfo()"><img src="img/11_icons/arrow_back.png"></div>
+                <h2 class="info-content-headline">Game Info</h2>
+                <div class="info-content">
+                    <div class="game-rules">
+                        <h3>Rules</h3>
+                        <p>Commotion in the Chicken Coop.</p>
+                        <p>To win the game, you need to defeat the final boss with at least 3 bottle throws.</p>
+                        <p>Additionally, you should have collected at least 7 coins. </p>
+                        <p>But be careful, the final boss sends out his chickens.</p>
+                        <p>You can eliminate them by jumping on them. </p>
+                        <p>Best of luck!</p>
+                    </div>
+                    <div class="game-controls">
+                        <h3>Controls</h3>
+                        <div class="game-controls-row">
+                            <div>Move Left</div>
+                            <img src="img/11_icons/arrow_left.png" alt="Arrow Left">
+                        </div>
+                        <div class="game-controls-row">
+                            <div>Move Right</div>
+                            <img src="img/11_icons/arrow_right.png" alt="Arrow Right">
+                        </div>
+                        <div class="game-controls-row">
+                            <div>Jump</div>
+                            <img src="img/11_icons/space_bar.png" alt="Space Bar">
+                            <img src="img/11_icons/arrow_up.png" alt="Arrow Up">
+                        </div>
+                        <div class="game-controls-row">
+                            <div>Throw Bottle</div>
+                            <div class="control-d">D</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Game Over Content -->
+            <div id="game-over-screen" class="game-over-screen-container d-none">
+                <div class="btn game-over-btn" onclick="backToMenu()">
+                    <h2>Back To Menu</h2>
+                </div>
+                <img class="game-over-screen-img" src="img/9_intro_outro_screens/game_over/game over.png">
+            </div>
+
+            <!-- Game Lost Content -->
+            <div id="you-lost-screen" class="game-over-screen-container d-none">
+                <div class="btn game-over-btn" onclick="backToMenu()">
+                    <h2>Back To Menu</h2>
+                </div>
+                <img class="game-over-screen-img" src="img/9_intro_outro_screens/game_over/you lost.png">
             </div>
 
             <!-- Canvas -->
@@ -48,9 +128,6 @@
 
 
     <div class="flip-device">Please rotate your device by 90°</div>
-
-
-
-
+    
 </body>
 </html>
