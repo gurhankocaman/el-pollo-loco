@@ -9,6 +9,7 @@ let bottle_breaks = new Audio('audio/breaking_bottle.mp3');
 let chicken_screams = new Audio('audio/chicken_scream.mp3');
 let endboss_screams = new Audio('audio/chicken_scream_long.mp3');
 let walking_sound = new Audio('./audio/running.mp3');
+let jump_sound = new Audio('./audio/jump.mp3');
 let character_hit = new Audio('audio/character_getting_hit.mp3');
 let character_dies = new Audio('audio/character_dies.mp3');
 let game_won = new Audio('audio/game_won.mp3');

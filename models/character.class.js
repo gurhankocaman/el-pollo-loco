@@ -97,6 +97,7 @@ class Character extends MovableObject {
         walking_sound.pause();
         this.characterMovesRight();
         this.characterMovesLeft();
+        walking_sound.pause();
         this.characterMovesUp();
         this.world.camera_x = -this.x + 100; // Update the position of the camera based on the X position of the character.
     }
@@ -151,7 +152,10 @@ class Character extends MovableObject {
         if (this.world.keyboard.SPACE && !this.isAboveGround()) { // Animation is executed only if I press Space an UP key and if isAboveGround() returns false
             this.jump();
         }
+
     }
+
+
 
     /**
      * Plays the hurt animation and sound for the character.
@@ -196,6 +200,7 @@ class Character extends MovableObject {
     }
 
     jump() {
-        this.speedY = 25;
+        this.speedY = 30;
+        jump_sound.play(); 
     }
 }

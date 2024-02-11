@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
     x = 3600;
     height = 275;
     width = 250;
-    speed = 7;
+    speed = 10;
     distanceTimer = 0;
  
     /**
